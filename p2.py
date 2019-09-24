@@ -1,14 +1,13 @@
 """
 entregue una lista con los nombres de los pacientes que
- se atendieron en los dias señalados
+se atendieron en los dias señalados
 """
-nombres = {}
 fechas = {}
-archivos = ("pacientes.txt", "atenciones.txt")
+pacientes = {}
+lista_rut_nombre = []
+lista_rut = []
 
 def pacientes_dia(dia, mes, ano):
-    
-    lista_rut = []
     date = (f"{dia}-{mes}-{ano}")
 
     archivo_atenciones = open("atenciones.txt", "r")
@@ -17,22 +16,19 @@ def pacientes_dia(dia, mes, ano):
         if fecha not in fechas:
             fechas[fecha]=[]
         fechas[fecha].append(rut)
-    #print(fechas) # dicc fecha:rut
-    for fecha, rut in fechas.items(): # aca se obtiene la fecha y rut segun fecha
+    #print('fechas:', fechas) # dicc fecha:rut
+    for fecha, rut in fechas.items():
+        #print(fecha, rut)
         if fecha == date:
-            #print(fecha, rut)
-            lista_rut.append(rut)
-            break
-        else:
-            print("[]")
-            break
-    archivo_atenciones.close()
-    archivo_pacientes = open("pacientes.txt")
-    for linea in archivo_pacientes:
-        rut,nombre,edad = linea.strip().split(":")
-    print(rut, nombre,edad)
+            for i in rut:
+                #print('rut:', i)
+        
+                archivo_pacientes = open("pacientes.txt", "r")
+                for linea in archivo_pacientes:
+                    pacientes = (linea.strip().split(":"))
+                    lista_rut_nombre = (pacientes[0], pacientes[1]) # rut, nombre
+                    if i == (lista_rut_nombre[0]):
+                        print(lista_rut_nombre[1])
 
-    
-
-                            
-pacientes_dia(4, 5, 2010)
+                       
+pacientes_dia(24,10,2019)
